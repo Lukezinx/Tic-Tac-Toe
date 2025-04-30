@@ -2,7 +2,7 @@ package TicTacToe.Board;
 import TicTacToe.Symbols.Symbols;
 
 public class Board {
-    StringBuilder sb = new StringBuilder();
+
 
     private Symbols[][] grid;
 
@@ -16,7 +16,7 @@ public class Board {
     }
 
     public void printBoard() {
-
+        StringBuilder sb = new StringBuilder();
         for(int i = 0; i < grid.length; i++) {
             for(int j = 0; j < grid.length; j++){
 
@@ -41,6 +41,8 @@ public class Board {
             }
             else {
                 System.out.println("already have a piece");
+                printBoard();
+                System.out.println();
                 return false;
             }
         }
@@ -56,32 +58,38 @@ public class Board {
                 }
             }
         }
+
         return true;
     }
 
-    public boolean hasWinner() {
+
+    public boolean checkDraw() {
+        return isFull() && !hasWinner(Symbols.X) && !hasWinner(Symbols.O);
+    }
+
+    public boolean hasWinner(Symbols symbols) {
 
         // linhas
         for(int i = 0; i < 2; i++) {
-            if( grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != Symbols.EMPTY) {
+            if( grid[i][0] == symbols && grid[i][1] == symbols && grid[i][2] == symbols) {
                 return true;
             }
         }
 
         // colunas
         for(int j = 0; j < 2; j++) {
-            if( grid[0][j] == grid[1][j] && grid[1][j] == grid[2][j] && grid[0][j] != Symbols.EMPTY) {
+            if( grid[0][j] == symbols && grid[1][j] == symbols && grid[2][j] == symbols) {
                 return true;
             }
         }
 
         // Diagonal Primaria
-        if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] && grid[0][0] != Symbols.EMPTY) {
+        if (grid[0][0] == symbols && grid[1][1] == symbols && grid[2][2] == symbols) {
             return true;
         }
 
         // Diagonal secundaria
-        if (grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0] && grid[0][2] != Symbols.EMPTY) {
+        if (grid[0][2] == symbols && grid[1][1] == symbols && grid[2][0] == symbols) {
             return true;
         }
 
