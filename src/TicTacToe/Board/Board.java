@@ -6,6 +6,10 @@ public class Board {
 
     private Symbols[][] grid;
 
+    public Symbols[][] getGrid() {
+        return grid;
+    }
+
     public Board() {
         grid = new Symbols[3][3];
         for(int i = 0; i < 3; i++){
@@ -41,7 +45,6 @@ public class Board {
             }
             else {
                 System.out.println("already have a piece");
-                printBoard();
                 System.out.println();
                 return false;
             }
@@ -70,14 +73,14 @@ public class Board {
     public boolean hasWinner(Symbols symbols) {
 
         // linhas
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 3; i++) {
             if( grid[i][0] == symbols && grid[i][1] == symbols && grid[i][2] == symbols) {
                 return true;
             }
         }
 
         // colunas
-        for(int j = 0; j < 2; j++) {
+        for(int j = 0; j < 3; j++) {
             if( grid[0][j] == symbols && grid[1][j] == symbols && grid[2][j] == symbols) {
                 return true;
             }
