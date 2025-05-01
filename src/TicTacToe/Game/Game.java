@@ -9,12 +9,6 @@ import java.util.*;
 
 public class Game {
 
-    private Players player;
-    private Players player2;
-    private SaveGame saveGame;
-    private Board board;
-
-
     Scanner sc = new Scanner(System.in);
     private  boolean gameOver = false;
 
@@ -22,24 +16,24 @@ public class Game {
 
         System.out.println("First player name");
         String currentPlayer1 = sc.nextLine();
-        player = new Players(currentPlayer1, Symbols.X);
+        Players player = new Players(currentPlayer1, Symbols.X);
 
         System.out.println("Second player name");
         String currentPlayer2 = sc.nextLine();
-        player2 = new Players(currentPlayer2, Symbols.O);
+        Players player2 = new Players(currentPlayer2, Symbols.O);
 
-        board = new Board();
+        Board board = new Board();
         Players currentPlayer = player;
         System.out.println("Game started");
 
         do {
-            System.out.println(currentPlayer.getNome() + "'s turn");
+            System.out.println(currentPlayer.getName() + "'s turn");
             board.printBoard();
             currentPlayer.play(board);
             System.out.println();
 
             if (board.hasWinner(currentPlayer.getSymbol())) {
-                System.out.println(currentPlayer.getNome() + " wins!");
+                System.out.println(currentPlayer.getName() + " wins!");
                 board.printBoard();
                 gameOver = true;
             } else if (board.checkDraw()) {
@@ -57,7 +51,8 @@ public class Game {
         System.out.println("[0] - No");
         int option = sc.nextInt();
         if(option == 1) {
-            saveGame.save();
+            SaveGame saveGame = new SaveGame();
+            saveGame.save(board,player,player2,currentPlayer,"saveGame.txt");
         } else {
             System.exit(0);
         }
