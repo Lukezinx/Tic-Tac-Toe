@@ -6,16 +6,16 @@ import java.util.*;
 
 public class Players {
 
-    private String nome;
+    private String name;
     private Symbols symbol;
 
-    public Players(String nome, Symbols symbols) {
-        this.nome = nome;
+    public Players(String name, Symbols symbols) {
+        this.name = name;
         this.symbol = symbols;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
 
